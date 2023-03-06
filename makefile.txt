@@ -1,0 +1,18 @@
+CC = gcc
+CCFLAGS = -Wall
+
+
+tweets_generator.o: tweets_generator.c markov_chain.c markov_chain.h
+    $(CC) $(CCFLAGS) -c tweets_generator.c
+
+markov_chain.o: markov_chain.c markov_chain.h linked_list.c linked_list.h
+    $(CC) $(CCFLAGS) -c markov_chain.c
+
+tweets:  tweets_generator.o markov_chain.o
+    $(CC) tweets_generator.o markov_chain.o -o tweets
+
+snakes_and_ladders.o: snakes_and_ladders.c  markov_chain.c markov_chain.h
+    $(CC) $(CCFLAGS) -c snakes_and_ladders.c
+
+snakes: snakes_and_ladders.o markov_chain.o
+    $(CC) snakes_and_ladders.o markov_chain.o -o snakes
